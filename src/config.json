@@ -1,0 +1,50 @@
+{
+    "production": {
+      "dbHost":"rppg-dhealth.ccka28nx5kgs.ap-northeast-2.rds.amazonaws.com",
+      "dbUser":"dhealth",
+      "dbPassword":"dhealth123!!",
+      "database": "dhealth",
+      "public_ip": "http://15.164.48.251:4111",
+      "deeplearning_ip": "http://172.30.0.239:",
+      "fcm_server_key": "AAAA6KyjWQs:APA91bHD1zVAjjWHh0ew6qYD2bU9CxTZRruwmOd-K5yyDe8aNk1QiNwg3pdA6J7ONLlOkxYBdFk-sgwSrlbvYP034iUNcqGGcJB2coXvSy0LjQ04FmmmVuZWNNdSkos-pulkhTDolSci",
+      "aws_url" : "https://prod-dhealth.s3.ap-northeast-2.amazonaws.com/",
+      "aws_id" : "AKIA277UZJGM5XEGBXGA",
+      "aws_secret" : "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",
+      "aws_region" : "ap-northeast-2",
+      "bucket" : "prod-dhealth",
+      "cookieDomain" : ".bioconnect.co.kr",
+      "smtp_id":"rbqja4636",
+      "smtp_pass":"bio181126*",
+      "smtp_email":"bioconnectinfo@bioconnect.co.kr",
+      "mdcn_service_key":"%2FsRl8CxZKH8zNVFXvMdnVmSruN%2F%2Begz4gCHUrWzkZkeCKaTDXfD9aiDgTkVvFNpo0iTz%2FYsbLsgBET5xJzZuCA%3D%3D",
+      "mdcn_service_url":"http://apis.data.go.kr/1471000/MdcinGrnIdntfcInfoService01/getMdcinGrnIdntfcInfoList01"
+  
+    },
+    "development": {
+      "dbHost":"localhost",
+      "dbUser":"root",
+      "dbPassword":"rbqja",
+      "database": "site"
+    },
+    "local": {
+      "dbHost":"rppg-dhealth.ccka28nx5kgs.ap-northeast-2.rds.amazonaws.com",
+      "dbUser":"dhealth",
+      "dbPassword":"dhealth123!!",
+      "database": "dhealth",
+      "public_ip": "http://192.168.0.21:4111",
+      "deeplearning_ip": "http://54.180.5.88:",
+      "fcm_server_key": "AAAA6KyjWQs:APA91bHD1zVAjjWHh0ew6qYD2bU9CxTZRruwmOd-K5yyDe8aNk1QiNwg3pdA6J7ONLlOkxYBdFk-sgwSrlbvYP034iUNcqGGcJB2coXvSy0LjQ04FmmmVuZWNNdSkos-pulkhTDolSci",
+      "aws_url" : "https://dev-dhealth.s3.ap-northeast-2.amazonaws.com/",
+      "aws_id" : "AKIA277UZJGM5XEGBXGA",
+      "aws_secret" : "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",
+      "aws_region" : "ap-northeast-2",
+      "bucket" : "dev-dhealth",
+      "cookieDomain" : ".bioconnect.co.kr",
+      "smtp_id":"rbqja4636",
+      "smtp_pass":"bio181126*",
+      "smtp_email":"bioconnectinfo@bioconnect.co.kr",
+      "mdcn_service_key":"%2FsRl8CxZKH8zNVFXvMdnVmSruN%2F%2Begz4gCHUrWzkZkeCKaTDXfD9aiDgTkVvFNpo0iTz%2FYsbLsgBET5xJzZuCA%3D%3D",
+      "mdcn_service_url":"http://apis.data.go.kr/1471000/MdcinGrnIdntfcInfoService01/getMdcinGrnIdntfcInfoList01"
+    }
+  }
+  
