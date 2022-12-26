@@ -1,36 +1,48 @@
-const {dbHost, dbUser, dbPassword} = require('../config.json');
-const mariadb = require('mariadb');
-const pool = mariadb.createPool({
-     host: dbHost, 
-     user: dbUser, 
-     password: dbPassword,
-     port: 3306,
-     database: 'site',
-     charset: 'utf8mb4',
-     connectionLimit: 1000
-});
+const { dbHost, dbUser, dbPassword } = require("../config.js");
+const mariadb = require("mariadb");
+var mysql = require("mysql");
+const dbConfig = {
+  host: dbHost,
+  user: dbUser,
+  password: dbPassword,
+  port: 3306,
+  database: "site",
+  charset: "utf8mb4",
+  connectionLimit: 50,
+};
 
+var connectionCount = 0;
 exports.connection = (async function () {
-    try {
-        var pool = await mysql.createPool(dbConfig);
-        logger.debug('pool created')
-        pool.on('acquire', function (connection) {
-            // logger.debug(`Connection ${connection.threadId} acquired connection count - ${++connectionCount}`);
-        });
-        pool.on('connection', function (connection) {
-            // logger.debug(`Connection ${connection.threadId} created connection count - ${connectionCount}`);
-        });
-        pool.on('enqueue', function () {
-            // logger.debug('Waiting for available connection slot');
-        });
-        pool.on('release', function (connection) {
-            // logger.debug(`Connection ${connection.threadId} released connection count - ${--connectionCount}`);
-        });
+  try {
+    console.log(dbHost);
+    var pool = await mysql.createPool(dbConfig);
+    console.log(pool);
+    pool.on("acquire", function (connection) {
+      console.log(
+        `Connection ${
+          connection.threadId
+        } acquired connection count - ${++connectionCount}`
+      );
+    });
+    pool.on("connection", function (connection) {
+      console.log(
+        `Connection ${connection.threadId} created connection count - ${connectionCount}`
+      );
+    });
+    pool.on("enqueue", function () {
+      console.log("Waiting for available connection slot");
+    });
+    pool.on("release", function (connection) {
+      console.log(
+        `Connection ${
+          connection.threadId
+        } released connection count - ${--connectionCount}`
+      );
+    });
 
-        return pool
-    } catch (e) {
-        logger.error('Failed to make all database connections!',e);
-        slack.sendToCrashReportNode(e);
-        throw e;
-    }
+    return pool;
+  } catch (e) {
+    console.error("Failed to make all database connections!", e);
+    throw e;
+  }
 })();
