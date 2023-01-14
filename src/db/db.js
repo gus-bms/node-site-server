@@ -8,7 +8,7 @@ const dbConfig = {
   port: 3306,
   database: "site",
   charset: "utf8mb4",
-  connectionLimit: 50,
+  connectionLimit: 500,
 };
 
 var connectionCount = 0;

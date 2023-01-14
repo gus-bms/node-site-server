@@ -17,6 +17,7 @@ module.exports = async function (app) {
           Array.isArray(rows) && rows.length != 0
             ? res.json({
                 r: true,
+                uid: rows[0].uid,
               })
             : res.json({
                 r: false,
