@@ -20,6 +20,7 @@ module.exports = async function (app) {
         connection.query(sql, function (err, rows) {
           if (err) throw err;
           console.log(rows);
+          connection.release();
           res.json({
             r: true,
             list: rows,
@@ -28,6 +29,7 @@ module.exports = async function (app) {
       });
     } catch (err) {
       console.log(err);
+      connection.release();
     }
   });
 };

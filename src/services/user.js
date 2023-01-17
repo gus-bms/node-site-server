@@ -14,6 +14,7 @@ module.exports = async function (app) {
         console.log(sql);
         connection.query(sql, (err, rows) => {
           console.log(rows);
+          connection.release();
           Array.isArray(rows) && rows.length != 0
             ? res.json({
                 r: true,
@@ -25,6 +26,7 @@ module.exports = async function (app) {
         });
       });
     } catch (err) {
+      connection.release();
       console.log(err);
       res.json({
         r: false,
@@ -46,6 +48,7 @@ module.exports = async function (app) {
           ('${req.body.uid}', '${req.body.name}', '${email}', '${profileUrl}', now())
         `;
         connection.query(sql, (err, rows) => {
+          connection.release();
           err
             ? (console.log(err),
               res.json({
@@ -58,6 +61,7 @@ module.exports = async function (app) {
       });
     } catch (err) {
       console.log(err);
+      connection.release();
       res.json({
         r: false,
       });

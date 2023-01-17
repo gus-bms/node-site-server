@@ -17,6 +17,7 @@ module.exports = async function (app) {
           if (Array.isArray(imgList) && imgList.length > 0) {
             await insertLogImg(imgList, rows.insertId);
           }
+          connection.release();
           res.json({
             r: true,
             list: rows,
@@ -25,6 +26,10 @@ module.exports = async function (app) {
       });
     } catch (err) {
       console.log(err);
+      connection.release();
+      res.json({
+        r: false,
+      });
     }
   });
 
