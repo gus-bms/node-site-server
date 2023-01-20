@@ -10,6 +10,7 @@ module.exports = async function (app) {
   app.get("/api/selectSpotList", async (req, res) => {
     try {
       db.getConnection(async (err, connection) => {
+        console.log(req.query.address_dong);
         const sql = `
           SELECT *
           FROM SPOT
