@@ -24,7 +24,7 @@ module.exports = (async () => {
     process.exit(1);
   });
 
-  // await routes(app);
+  await routes(app);
 
   return app;
 })();
