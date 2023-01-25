@@ -13,7 +13,7 @@ module.exports = async function (app) {
         console.log("동 ==", req.query.address_dong);
         const sql = `
           SELECT *
-          FROM SPOT
+          FROM spot
           WHERE 1=1
           AND address_dong LIKE '%${req.query.address_dong}%'
         `;
