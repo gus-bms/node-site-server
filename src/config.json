@@ -20,10 +20,10 @@
     "mdcn_service_url": "http://apis.data.go.kr/1471000/MdcinGrnIdntfcInfoService01/getMdcinGrnIdntfcInfoList01"
   },
   "development": {
-    "dbHost": "localhost",
-    "dbUser": "root",
-    "dbPassword": "rbqja",
-    "database": "site"
+    "dbHost": "findphoto.cguahzqeouvx.ap-northeast-2.rds.amazonaws.com",
+    "dbUser": "gusbms",
+    "dbPassword": "qkrrbqja",
+    "database": "find_photo"
   },
   "local": {
     "dbHost": "rppg-dhealth.ccka28nx5kgs.ap-northeast-2.rds.amazonaws.com",
