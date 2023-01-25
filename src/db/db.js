@@ -6,7 +6,7 @@ const dbConfig = {
   user: dbUser,
   password: dbPassword,
   port: 3306,
-  database: "site",
+  database: "find_photo",
   charset: "utf8mb4",
   connectionLimit: 500,
 };
