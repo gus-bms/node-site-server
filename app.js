@@ -16,7 +16,15 @@ module.exports = (async () => {
     res.json({ hello: "hello" });
   });
 
-  await routes(app);
+  process.on("uncaughtException", (err) => {
+    console.log("a");
+    console.error(err);
+
+    // retruen것이 없기 때문에 process를 종료시켜 줘야함돠!
+    process.exit(1);
+  });
+
+  // await routes(app);
 
   return app;
 })();
