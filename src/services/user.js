@@ -119,7 +119,7 @@ module.exports = async function (app) {
       db.getConnection(async (err, connection) => {
         const sql = `
             UPDATE user
-            set intro = '${intro}'
+            set intro = "${intro}"
             WHERE
             uid = '${uid}'
           `;

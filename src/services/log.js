@@ -40,9 +40,10 @@ module.exports = async function (app) {
       console.log("selectLog");
       db.getConnection(async (err, connection) => {
         const sql = `
-          SELECT l.log_pk, l.spot_pk, title, content, user_pk, li.log_img_pk , li.img_name, s.name 
+          SELECT l.log_pk, l.spot_pk, title, content, l.user_pk, li.log_img_pk , li.img_name, s.name, u.name, u.profile_url
           FROM log l LEFT JOIN log_img li ON l.log_pk = li.log_pk
           LEFT JOIN spot s ON l.spot_pk = s.spot_pk 
+          LEFT JOIN user u on l.user_pk = u.user_pk
           WHERE l.log_pk = ${req.query.logPk}
         `;
         connection.query(sql, async function (err, rows) {
@@ -84,8 +85,9 @@ module.exports = async function (app) {
       console.log(type, value);
       db.getConnection(async (err, connection) => {
         const sql = `
-          SELECT l.log_pk, l.spot_pk, title, content, user_pk, li.log_img_pk , li.img_name, s.name
+          SELECT l.log_pk, l.spot_pk, title, content, l.user_pk, li.log_img_pk , li.img_name, s.name, u.name, u.profile_url
           FROM log l LEFT JOIN log_img li ON l.log_pk = li.log_pk
+          LEFT JOIN user u on l.user_pk = u.user_pk
           LEFT JOIN spot s ON l.spot_pk = s.spot_pk
           WHERE l.${type} = ${value}
           AND li.represent_yn = "Y"
