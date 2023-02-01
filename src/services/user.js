@@ -25,6 +25,7 @@ module.exports = async function (app) {
                 profileUrl: rows[0].profile_url,
                 userPk: rows[0].user_pk,
                 intro: rows[0].intro,
+                name: rows[0].name,
               })
             : res.json({
                 r: false,

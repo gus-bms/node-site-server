@@ -1,28 +1,33 @@
+const util = require("util");
+
 module.exports = async function (app) {
   const db = await require("../db/db").connection;
 
   // DB에 log를 저장합니다.
   app.post("/api/log/insertLog", async (req, res) => {
     try {
-      console.log("insertLog", req.body);
-      let imgList = req.body.images;
       db.getConnection(async (err, connection) => {
+        const query = util.promisify(connection.query).bind(connection);
+        console.log("insertLog", req.body);
+        let imgList = req.body.images;
+        let uid = req.body.uid;
+        let userPk = await query(
+          `SELECT user_pk FROM user WHERE uid = '${uid}'`
+        );
         const sql = `
           INSERT INTO log
           (title, spot_pk, content, user_pk, reg_dt)
-          VALUES ('${req.body.title}', ${req.body.spot_pk}, '${req.body.content}', ${req.body.user_pk}, now())
+          VALUES ('${req.body.title}', ${req.body.spot_pk}, '${req.body.content}', ${userPk[0].user_pk}, now())
         `;
-        connection.query(sql, async function (err, rows) {
-          console.log(sql);
-          if (Array.isArray(imgList) && imgList.length > 0) {
-            console.log("@@@@@@@@@@@@@@@@@", rows);
-            await insertLogImg(imgList, rows.insertId, req.body.representImg);
-          }
-          connection.release();
-          res.json({
-            r: true,
-            id: rows.insertId,
-          });
+
+        let resp = await query(sql);
+        if (Array.isArray(imgList) && imgList.length > 0) {
+          await insertLogImg(imgList, resp.insertId, req.body.representImg);
+        }
+        connection.release();
+        res.json({
+          r: true,
+          id: resp.insertId,
         });
       });
     } catch (err) {
