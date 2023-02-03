@@ -8,6 +8,7 @@ module.exports = async function (app) {
 
   // DB에 저장된 장소 목록 조회
   app.get("/api/spot/selectSpotList", async (req, res) => {
+    let address = req.query.address_dong != "" ? req.query.address_dong : "%";
     try {
       db.getConnection(async (err, connection) => {
         console.log("동 ==", req.query.address_dong);
@@ -15,7 +16,7 @@ module.exports = async function (app) {
           SELECT *
           FROM spot
           WHERE 1=1
-          AND address_dong LIKE '%${req.query.address_dong}%'
+          AND address_dong LIKE '%${address}%'
         `;
 
         connection.query(sql, function (err, rows) {
