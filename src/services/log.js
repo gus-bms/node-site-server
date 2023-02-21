@@ -29,6 +29,7 @@ module.exports = async function (app) {
           r: true,
           id: resp.insertId,
         });
+        return;
       });
     } catch (err) {
       console.log(err);

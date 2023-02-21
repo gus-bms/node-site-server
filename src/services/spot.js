@@ -1,3 +1,5 @@
+const util = require("util");
+
 // 서버 가동시 init을 통해서 db 초기화 실행
 module.exports.init = async (app) => {
   const db = await require("../db/db").connection;
@@ -9,25 +11,41 @@ module.exports = async function (app) {
   // DB에 저장된 장소 목록 조회
   app.get("/api/spot/selectSpotList", async (req, res) => {
     let address = req.query.address_dong != "" ? req.query.address_dong : "%";
+    let pages = req.query.pages;
+    let isInit = req.query.isInit;
+
     try {
       db.getConnection(async (err, connection) => {
-        console.log("동 ==", req.query.address_dong);
+        const query = util.promisify(connection.query).bind(connection);
         const sql = `
           SELECT *
           FROM spot
           WHERE 1=1
           AND address_dong LIKE '%${address}%'
+          LIMIT ${pages}
         `;
 
-        connection.query(sql, function (err, rows) {
-          console.log(sql);
-          if (err) throw err;
-          console.log(rows);
+        let resp = await query(sql);
+
+        if (isInit === "true") {
+          let count =
+            await query(`SELECT count(spot_pk) as count FROM spot WHERE 1=1
+          AND address_dong LIKE '%${address}%'
+          `);
+          console.log("count == ", count[0]);
           connection.release();
           res.json({
             r: true,
-            list: rows,
+            list: resp,
+            count: count[0].count,
           });
+          return;
+        }
+        console.log("not Init!!");
+        connection.release();
+        res.json({
+          r: true,
+          list: resp,
         });
       });
     } catch (err) {
